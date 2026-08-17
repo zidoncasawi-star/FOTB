@@ -68,6 +68,57 @@ data class TranslationsEnvelope(
   @Json(name = "strings") val strings: Map<String, String> = emptyMap()
 )
 
+@JsonClass(generateAdapter = true)
+data class TeamStatisticsDto(
+  @Json(name = "possession_pct") val possessionPct: Int? = null,
+  @Json(name = "shots_on_target") val shotsOnTarget: Int? = null,
+  @Json(name = "shots_off_target") val shotsOffTarget: Int? = null,
+  @Json(name = "corners") val corners: Int? = null,
+  @Json(name = "fouls") val fouls: Int? = null,
+  @Json(name = "offsides") val offsides: Int? = null,
+  @Json(name = "yellow_cards") val yellowCards: Int? = null,
+  @Json(name = "red_cards") val redCards: Int? = null
+)
+
+@JsonClass(generateAdapter = true)
+data class MatchStatisticsDto(
+  @Json(name = "home") val home: TeamStatisticsDto? = null,
+  @Json(name = "away") val away: TeamStatisticsDto? = null
+)
+
+@JsonClass(generateAdapter = true)
+data class MatchIncidentDto(
+  @Json(name = "minute") val minute: Int? = null,
+  @Json(name = "team") val team: String, // "home" | "away"
+  @Json(name = "type") val type: String, // "goal" | "card" | "substitution"
+  @Json(name = "player") val player: String? = null,
+  @Json(name = "player_in") val playerIn: String? = null,
+  @Json(name = "player_out") val playerOut: String? = null
+)
+
+@JsonClass(generateAdapter = true)
+data class LineupPlayerDto(
+  @Json(name = "name") val name: String? = null,
+  @Json(name = "position") val position: String? = null,
+  @Json(name = "number") val number: Int? = null
+)
+
+@JsonClass(generateAdapter = true)
+data class MatchLineupsDto(
+  @Json(name = "home") val home: List<LineupPlayerDto>? = null,
+  @Json(name = "away") val away: List<LineupPlayerDto>? = null
+)
+
+@JsonClass(generateAdapter = true)
+data class MatchDetailsEnvelope(
+  @Json(name = "lang") val lang: String? = null,
+  @Json(name = "match") val match: MatchDto,
+  @Json(name = "statistics") val statistics: MatchStatisticsDto? = null,
+  @Json(name = "incidents") val incidents: List<MatchIncidentDto> = emptyList(),
+  @Json(name = "lineups") val lineups: MatchLineupsDto? = null,
+  @Json(name = "details_updated_at") val detailsUpdatedAt: String? = null
+)
+
 enum class MatchStatus(val apiValue: String) {
   SCHEDULED("scheduled"),
   LIVE("live"),
@@ -144,6 +195,23 @@ data class League(
   val name: String,
   val country: String,
   val logoUrl: String?
+)
+
+data class MatchDetails(
+  val match: Match,
+  val statistics: MatchStatisticsDto?,
+  val incidents: List<MatchIncidentDto>,
+  val lineups: MatchLineupsDto?
+) {
+  val hasStatistics: Boolean get() = statistics?.home != null || statistics?.away != null
+  val hasLineups: Boolean get() = !lineups?.home.isNullOrEmpty() || !lineups?.away.isNullOrEmpty()
+}
+
+fun MatchDetailsEnvelope.toDomain(): MatchDetails = MatchDetails(
+  match = match.toDomain(),
+  statistics = statistics,
+  incidents = incidents,
+  lineups = lineups
 )
 
 /**

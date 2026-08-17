@@ -53,6 +53,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.R
 import com.example.data.model.Match
+import com.example.data.model.MatchIncidentDto
+import com.example.data.model.MatchLineupsDto
+import com.example.data.model.MatchStatisticsDto
 import com.example.data.model.MatchStatus
 import com.example.data.repository.TranslationManager
 import com.example.ui.common.ErrorState
@@ -122,7 +125,8 @@ fun MatchDetailsScreen(
           )
         }
         is MatchDetailsUiState.Success -> {
-          val match = state.match
+          val details = state.details
+          val match = details.match
           Column(
             modifier = Modifier
               .fillMaxSize()
@@ -168,10 +172,10 @@ fun MatchDetailsScreen(
             // Tab Content
             Box(modifier = Modifier.padding(16.dp)) {
               when (selectedTabIndex) {
-                0 -> MatchOverviewSection(match = match, translationManager = translationManager)
-                1 -> MatchStatsSection(match = match, translationManager = translationManager)
-                2 -> MatchLineupsSection(match = match, translationManager = translationManager)
-                3 -> MatchH2HSection(match = match, translationManager = translationManager)
+                0 -> MatchOverviewSection(match = match, incidents = details.incidents, translationManager = translationManager)
+                1 -> MatchStatsSection(statistics = details.statistics, translationManager = translationManager)
+                2 -> MatchLineupsSection(match = match, lineups = details.lineups, translationManager = translationManager)
+                3 -> MatchH2HSection(translationManager = translationManager)
               }
             }
           }
@@ -352,6 +356,7 @@ private fun MatchHeaderScoreboard(
 @Composable
 private fun MatchOverviewSection(
   match: Match,
+  incidents: List<MatchIncidentDto>,
   translationManager: TranslationManager
 ) {
   Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -373,7 +378,7 @@ private fun MatchOverviewSection(
       }
     }
 
-    // Match events (goals, cards, etc.) are not provided by the data source yet.
+    // Match events (goals, cards, substitutions), from the source's match incidents feed.
     Box(
       modifier = Modifier
         .fillMaxWidth()
@@ -389,11 +394,43 @@ private fun MatchOverviewSection(
           fontWeight = FontWeight.Bold,
           color = MaterialTheme.colorScheme.onSurface
         )
-        Text(
-          text = "Match events are not available yet.",
-          style = MaterialTheme.typography.bodyMedium,
-          color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
+        if (incidents.isEmpty()) {
+          Text(
+            text = "Match events are not available yet.",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+          )
+        } else {
+          incidents.forEach { inc ->
+            val minuteLabel = inc.minute?.let { "$it'" } ?: ""
+            val description = when (inc.type) {
+              "substitution" -> "Substitution: ${inc.playerIn ?: "?"} in, ${inc.playerOut ?: "?"} out"
+              else -> "Match event: ${inc.player ?: "Unknown player"}"
+            }
+            EventItem(minute = minuteLabel, description = description, isHome = inc.team == "home")
+          }
+        }
+      }
+    }
+  }
+}
+
+@Composable
+private fun EventItem(minute: String, description: String, isHome: Boolean) {
+  Row(
+    modifier = Modifier.fillMaxWidth(),
+    verticalAlignment = Alignment.CenterVertically,
+    horizontalArrangement = if (isHome) Arrangement.Start else Arrangement.End
+  ) {
+    Box(
+      modifier = Modifier
+        .clip(RoundedCornerShape(6.dp))
+        .background(MaterialTheme.colorScheme.surfaceVariant)
+        .padding(horizontal = 8.dp, vertical = 4.dp)
+    ) {
+      Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+        Text(text = minute, fontWeight = FontWeight.Bold, fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurface)
+        Text(text = description, fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurface)
       }
     }
   }
@@ -420,9 +457,12 @@ private fun DetailRow(icon: ImageVector, label: String, value: String) {
 
 @Composable
 private fun MatchStatsSection(
-  match: Match,
+  statistics: MatchStatisticsDto?,
   translationManager: TranslationManager
 ) {
+  val home = statistics?.home
+  val away = statistics?.away
+
   Box(
     modifier = Modifier
       .fillMaxWidth()
@@ -439,10 +479,64 @@ private fun MatchStatsSection(
         color = MaterialTheme.colorScheme.onSurface
       )
 
-      Text(
-        text = "Match statistics are not available yet.",
-        style = MaterialTheme.typography.bodyMedium,
-        color = MaterialTheme.colorScheme.onSurfaceVariant
+      if (home == null && away == null) {
+        Text(
+          text = "Match statistics are not available yet.",
+          style = MaterialTheme.typography.bodyMedium,
+          color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+      } else {
+        if (home?.possessionPct != null || away?.possessionPct != null) {
+          StatBar(translationManager.getString(R.string.possession, "possession"), home?.possessionPct, away?.possessionPct, suffix = "%")
+        }
+        StatBar(translationManager.getString(R.string.shots_on_target, "shots_on_target"), home?.shotsOnTarget, away?.shotsOnTarget)
+        StatBar(translationManager.getString(R.string.total_shots, "total_shots"), sumOrNull(home?.shotsOnTarget, home?.shotsOffTarget), sumOrNull(away?.shotsOnTarget, away?.shotsOffTarget))
+        StatBar(translationManager.getString(R.string.corners, "corners"), home?.corners, away?.corners)
+        StatBar(translationManager.getString(R.string.fouls, "fouls"), home?.fouls, away?.fouls)
+        StatBar(translationManager.getString(R.string.yellow_cards, "yellow_cards"), home?.yellowCards, away?.yellowCards)
+      }
+    }
+  }
+}
+
+private fun sumOrNull(a: Int?, b: Int?): Int? = if (a == null && b == null) null else (a ?: 0) + (b ?: 0)
+
+@Composable
+private fun StatBar(label: String, homeValue: Int?, awayValue: Int?, suffix: String = "") {
+  val home = homeValue ?: 0
+  val away = awayValue ?: 0
+  val total = (home + away).coerceAtLeast(1)
+  val homeRatio = home.toFloat() / total.toFloat()
+
+  Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+    Row(
+      modifier = Modifier.fillMaxWidth(),
+      horizontalArrangement = Arrangement.SpaceBetween,
+      verticalAlignment = Alignment.CenterVertically
+    ) {
+      Text(text = "${homeValue ?: "-"}$suffix", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = LiveGreen)
+      Text(text = label, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+      Text(text = "${awayValue ?: "-"}$suffix", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurface)
+    }
+
+    Row(
+      modifier = Modifier
+        .fillMaxWidth()
+        .height(6.dp)
+        .clip(RoundedCornerShape(3.dp))
+        .background(MaterialTheme.colorScheme.surfaceVariant)
+    ) {
+      Box(
+        modifier = Modifier
+          .weight(homeRatio.coerceIn(0.05f, 0.95f))
+          .fillMaxSize()
+          .background(LiveGreen)
+      )
+      Box(
+        modifier = Modifier
+          .weight((1f - homeRatio).coerceIn(0.05f, 0.95f))
+          .fillMaxSize()
+          .background(MaterialTheme.colorScheme.outline)
       )
     }
   }
@@ -451,8 +545,12 @@ private fun MatchStatsSection(
 @Composable
 private fun MatchLineupsSection(
   match: Match,
+  lineups: MatchLineupsDto?,
   translationManager: TranslationManager
 ) {
+  val home = lineups?.home.orEmpty()
+  val away = lineups?.away.orEmpty()
+
   Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
     Box(
       modifier = Modifier
@@ -473,11 +571,41 @@ private fun MatchLineupsSection(
 
         HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.4f), modifier = Modifier.padding(vertical = 4.dp))
 
-        Text(
-          text = "Lineups are not available yet.",
-          style = MaterialTheme.typography.bodyMedium,
-          color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
+        if (home.isEmpty() && away.isEmpty()) {
+          Text(
+            text = "Lineups are not available yet.",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+          )
+        } else {
+          Text(
+            text = translationManager.getString(R.string.starting_xi, "starting_xi"),
+            style = MaterialTheme.typography.labelMedium,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+          )
+
+          val rows = maxOf(home.size, away.size)
+          for (i in 0 until rows) {
+            val h = home.getOrNull(i)
+            val a = away.getOrNull(i)
+            Row(
+              modifier = Modifier.fillMaxWidth(),
+              horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+              Text(
+                text = h?.let { "${it.number ?: ""}. ${it.name ?: ""}".trim() } ?: "",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurface
+              )
+              Text(
+                text = a?.let { "${it.number ?: ""}. ${it.name ?: ""}".trim() } ?: "",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurface
+              )
+            }
+          }
+        }
       }
     }
   }
@@ -485,7 +613,6 @@ private fun MatchLineupsSection(
 
 @Composable
 private fun MatchH2HSection(
-  match: Match,
   translationManager: TranslationManager
 ) {
   Box(

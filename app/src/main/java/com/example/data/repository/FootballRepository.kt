@@ -6,6 +6,7 @@ import com.example.data.api.MockDataGenerator
 import com.example.data.model.LanguageDto
 import com.example.data.model.League
 import com.example.data.model.Match
+import com.example.data.model.MatchDetails
 import com.example.data.model.toDomain
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -92,19 +93,13 @@ class FootballRepository {
     }
   }
 
-  suspend fun getMatchById(matchId: Int, langCode: String): Match? = withContext(Dispatchers.IO) {
-    // Check live first
-    val liveResult = getLiveMatches(langCode).getOrNull() ?: emptyList()
-    val liveMatch = liveResult.find { it.id == matchId }
-    if (liveMatch != null) return@withContext liveMatch
-
-    // Check today's matches
-    val todayMatches = getMatches(langCode, LocalDate.now()).getOrNull() ?: emptyList()
-    val todayMatch = todayMatches.find { it.id == matchId }
-    if (todayMatch != null) return@withContext todayMatch
-
-    // Fallback to searching mock list
-    val allMock = (MockDataGenerator.getLiveMatches() + MockDataGenerator.getMatchesForDate(LocalDate.now())).map { it.toDomain() }
-    allMock.find { it.id == matchId }
+  suspend fun getMatchDetails(matchId: Int, langCode: String): Result<MatchDetails> = withContext(Dispatchers.IO) {
+    try {
+      val response = apiService.getMatchDetails(id = matchId, lang = langCode)
+      Result.success(response.toDomain())
+    } catch (e: Throwable) {
+      Log.w(TAG, "getMatchDetails failed for id=$matchId", e)
+      Result.failure(e)
+    }
   }
 }

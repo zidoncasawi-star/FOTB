@@ -2,6 +2,7 @@ package com.example.data.api
 
 import com.example.data.model.LanguagesEnvelope
 import com.example.data.model.LeaguesEnvelope
+import com.example.data.model.MatchDetailsEnvelope
 import com.example.data.model.MatchesEnvelope
 import com.example.data.model.TranslationsEnvelope
 import retrofit2.http.GET
@@ -34,4 +35,10 @@ interface FootballApiService {
   suspend fun getTranslations(
     @Query("lang") lang: String
   ): TranslationsEnvelope
+
+  @GET("match_details.php")
+  suspend fun getMatchDetails(
+    @Query("id") id: Int,
+    @Query("lang") lang: String
+  ): MatchDetailsEnvelope
 }
