@@ -1,0 +1,79 @@
+<resources>
+    <string name="app_name">Football Today</string>
+    <string name="tab_live">En Vivo</string>
+    <string name="tab_matches">Partidos</string>
+    <string name="tab_leagues">Ligas</string>
+    <string name="tab_settings">Ajustes</string>
+    
+    <string name="live_matches">Partidos en Directo</string>
+    <string name="no_live_matches">Sin Partidos en Directo</string>
+    <string name="no_live_matches_desc">No hay partidos en juego en este momento. Consulta la pestaña Partidos para ver los próximos encuentros.</string>
+    <string name="view_today_matches">Ver Partidos de Hoy</string>
+    
+    <string name="status_live">EN VIVO</string>
+    <string name="status_halftime">DES</string>
+    <string name="status_finished">FIN</string>
+    <string name="status_scheduled">Próximo</string>
+    <string name="status_postponed">Aplazado</string>
+    <string name="status_cancelled">Cancelado</string>
+    
+    <string name="updated_just_now">Actualizado ahora</string>
+    <string name="updated_seconds_ago">Actualizado hace %1$ds</string>
+    <string name="updated_minutes_ago">Actualizado hace %1$dm</string>
+    <string name="refresh">Actualizar</string>
+    
+    <string name="today">Hoy</string>
+    <string name="yesterday">Ayer</string>
+    <string name="tomorrow">Mañana</string>
+    
+    <string name="all_leagues">Todas las Ligas</string>
+    <string name="filter_all">Todos</string>
+    <string name="filter_live">En Vivo</string>
+    <string name="filter_finished">Finalizados</string>
+    <string name="filter_upcoming">Próximos</string>
+    
+    <string name="search_leagues">Buscar ligas, torneos, países…</string>
+    <string name="no_matches_found">No se encontraron partidos</string>
+    <string name="no_matches_found_desc">No hay encuentros programados para esta fecha o filtro.</string>
+    <string name="no_leagues_found">No se encontraron ligas</string>
+    
+    <string name="match_details">Detalles del Partido</string>
+    <string name="match_overview">Resumen</string>
+    <string name="match_stats">Estadísticas</string>
+    <string name="match_lineups">Alineaciones</string>
+    <string name="match_h2h">Cara a cara</string>
+    
+    <string name="kickoff">Inicio</string>
+    <string name="venue">Sede</string>
+    <string name="stadium">Estadio</string>
+    <string name="referee">Árbitro</string>
+    <string name="possession">Posesión de Balón</string>
+    <string name="shots_on_target">Tiros a Puerta</string>
+    <string name="total_shots">Tiros Totales</string>
+    <string name="fouls">Faltas</string>
+    <string name="corners">Córners</string>
+    <string name="yellow_cards">Tarjetas Amarillas</string>
+    <string name="red_cards">Tarjetas Rojas</string>
+    <string name="formation">Formación</string>
+    <string name="starting_xi">Once Inicial</string>
+    <string name="substitutes">Suplentes</string>
+    
+    <string name="settings_title">Ajustes</string>
+    <string name="settings_language">Idioma</string>
+    <string name="settings_language_desc">Seleccionar idioma de la interfaz</string>
+    <string name="settings_theme">Tema y Apariencia</string>
+    <string name="settings_theme_desc">Elegir modo oscuro, claro o del sistema</string>
+    <string name="theme_system">Predeterminado del Sistema</string>
+    <string name="theme_dark">Tema Oscuro (Recomendado)</string>
+    <string name="theme_light">Tema Claro</string>
+    <string name="settings_api">Servidor y Conectividad</string>
+    <string name="settings_api_desc">Estado del servidor de resultados en directo</string>
+    <string name="settings_about">Acerca de Football Today</string>
+    <string name="settings_version">Versión 1.0.0 (Nativo Android)</string>
+    <string name="settings_sync_status">Sincronización en Directo</string>
+    <string name="settings_sync_active">Actualización automática cada 15–20s en Vivo</string>
+    
+    <string name="retry">Reintentar</string>
+    <string name="error_loading">No se pudieron cargar los partidos</string>
+    <string name="error_loading_desc">Verifique su conexión de red o el estado del servidor.</string>
+</resources>

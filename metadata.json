@@ -1,0 +1,7 @@
+{
+  "name": "Football Today",
+  "description": "Professional real-time football live scores, matches, league tables, and multilingual match details.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

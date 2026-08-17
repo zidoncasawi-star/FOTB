@@ -1,0 +1,79 @@
+<resources>
+    <string name="app_name">Football Today</string>
+    <string name="tab_live">Live</string>
+    <string name="tab_matches">Wedstrijden</string>
+    <string name="tab_leagues">Competities</string>
+    <string name="tab_settings">Instellingen</string>
+    
+    <string name="live_matches">Live Wedstrijden</string>
+    <string name="no_live_matches">Geen Live Wedstrijden</string>
+    <string name="no_live_matches_desc">Er zijn momenteel geen wedstrijden bezig. Bekijk het tabblad Wedstrijden voor aankomende duels.</string>
+    <string name="view_today_matches">Bekijk wedstrijden van vandaag</string>
+    
+    <string name="status_live">LIVE</string>
+    <string name="status_halftime">RUST</string>
+    <string name="status_finished">EINDE</string>
+    <string name="status_scheduled">Binnenkort</string>
+    <string name="status_postponed">Uitgesteld</string>
+    <string name="status_cancelled">Geannuleerd</string>
+    
+    <string name="updated_just_now">Zojuist bijgewerkt</string>
+    <string name="updated_seconds_ago">%1$ds geleden bijgewerkt</string>
+    <string name="updated_minutes_ago">%1$dm geleden bijgewerkt</string>
+    <string name="refresh">Vernieuwen</string>
+    
+    <string name="today">Vandaag</string>
+    <string name="yesterday">Gisteren</string>
+    <string name="tomorrow">Morgen</string>
+    
+    <string name="all_leagues">Alle Competities</string>
+    <string name="filter_all">Alles</string>
+    <string name="filter_live">Live</string>
+    <string name="filter_finished">Afgelopen</string>
+    <string name="filter_upcoming">Aankomend</string>
+    
+    <string name="search_leagues">Zoek competities, bekers, landen…</string>
+    <string name="no_matches_found">Geen wedstrijden gevonden</string>
+    <string name="no_matches_found_desc">Geen wedstrijden gepland voor deze datum of filter.</string>
+    <string name="no_leagues_found">Geen competities gevonden</string>
+    
+    <string name="match_details">Wedstrijddetails</string>
+    <string name="match_overview">Overzicht</string>
+    <string name="match_stats">Statistieken</string>
+    <string name="match_lineups">Opstellingen</string>
+    <string name="match_h2h">Onderling</string>
+    
+    <string name="kickoff">Aftrap</string>
+    <string name="venue">Locatie</string>
+    <string name="stadium">Stadion</string>
+    <string name="referee">Scheidsrechter</string>
+    <string name="possession">Balbezit</string>
+    <string name="shots_on_target">Schoten op doel</string>
+    <string name="total_shots">Schoten totaal</string>
+    <string name="fouls">Overtredingen</string>
+    <string name="corners">Hoekschoppen</string>
+    <string name="yellow_cards">Gele kaarten</string>
+    <string name="red_cards">Rode kaarten</string>
+    <string name="formation">Formatie</string>
+    <string name="starting_xi">Basisopstelling</string>
+    <string name="substitutes">Wisselspelers</string>
+    
+    <string name="settings_title">Instellingen</string>
+    <string name="settings_language">Taal</string>
+    <string name="settings_language_desc">Kies taal van de interface</string>
+    <string name="settings_theme">Weergave</string>
+    <string name="settings_theme_desc">Kies donker, licht of systeemthema</string>
+    <string name="theme_system">Systeemstandaard</string>
+    <string name="theme_dark">Donker thema (Aanbevolen)</string>
+    <string name="theme_light">Licht thema</string>
+    <string name="settings_api">Server &amp; Verbinding</string>
+    <string name="settings_api_desc">Status livescore-server</string>
+    <string name="settings_about">Over Football Today</string>
+    <string name="settings_version">Versie 1.0.0 (Native Android)</string>
+    <string name="settings_sync_status">Live Synchronisatie</string>
+    <string name="settings_sync_active">Elke 15–20s automatisch vernieuwen</string>
+    
+    <string name="retry">Opnieuw proberen</string>
+    <string name="error_loading">Kan wedstrijden niet laden</string>
+    <string name="error_loading_desc">Controleer uw internetverbinding of de serverstatus.</string>
+</resources>

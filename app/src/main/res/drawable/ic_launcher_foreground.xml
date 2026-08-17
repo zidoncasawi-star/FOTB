@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    
+    <!-- Outer Soccer Ball Circle -->
+    <path
+        android:fillColor="#00E676"
+        android:pathData="M54,54m-28,0a28,28 0 1,0 56,0a28,28 0 1,0 -56,0" />
+    
+    <!-- Inner White Shell -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,54m-24,0a24,24 0 1,0 48,0a24,24 0 1,0 -48,0" />
+        
+    <!-- Center Pentagon (Dark Navy/Charcoal) -->
+    <path
+        android:fillColor="#0B0F19"
+        android:pathData="M54,43 L63,49.5 L59.5,60 L48.5,60 L45,49.5 Z" />
+        
+    <!-- Soccer Ball Seam Lines and Surrounding Patches -->
+    <path
+        android:fillColor="#0B0F19"
+        android:pathData="M54,43 L54,30.5 M63,49.5 L74,45 M59.5,60 L68,70 M48.5,60 L40,70 M45,49.5 L34,45"
+        android:strokeColor="#0B0F19"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+        
+    <path
+        android:fillColor="#00E676"
+        android:pathData="M54,30.5 L50,30.5 L46,34 L54,34 Z M74,45 L77,42 L77,48 Z M68,70 L72,74 L65,76 Z M40,70 L36,74 L43,76 Z M34,45 L31,42 L31,48 Z" />
+</vector>
+

@@ -1,0 +1,79 @@
+<resources>
+    <string name="app_name">Football Today</string>
+    <string name="tab_live">Ao Vivo</string>
+    <string name="tab_matches">Jogos</string>
+    <string name="tab_leagues">Ligas</string>
+    <string name="tab_settings">Definições</string>
+    
+    <string name="live_matches">Jogos em Direto</string>
+    <string name="no_live_matches">Sem Jogos em Direto</string>
+    <string name="no_live_matches_desc">Não há jogos a decorrer no momento. Consulte o separador Jogos para ver os próximos confrontos.</string>
+    <string name="view_today_matches">Ver jogos de hoje</string>
+    
+    <string name="status_live">AO VIVO</string>
+    <string name="status_halftime">INT</string>
+    <string name="status_finished">FIM</string>
+    <string name="status_scheduled">Agendado</string>
+    <string name="status_postponed">Adiado</string>
+    <string name="status_cancelled">Cancelado</string>
+    
+    <string name="updated_just_now">Atualizado agora</string>
+    <string name="updated_seconds_ago">Atualizado há %1$ds</string>
+    <string name="updated_minutes_ago">Atualizado há %1$dm</string>
+    <string name="refresh">Atualizar</string>
+    
+    <string name="today">Hoje</string>
+    <string name="yesterday">Ontem</string>
+    <string name="tomorrow">Amanhã</string>
+    
+    <string name="all_leagues">Todas as Ligas</string>
+    <string name="filter_all">Todos</string>
+    <string name="filter_live">Ao Vivo</string>
+    <string name="filter_finished">Terminados</string>
+    <string name="filter_upcoming">Agendados</string>
+    
+    <string name="search_leagues">Pesquisar ligas, taças, países…</string>
+    <string name="no_matches_found">Nenhum jogo encontrado</string>
+    <string name="no_matches_found_desc">Nenhum jogo agendado para esta data ou filtro.</string>
+    <string name="no_leagues_found">Nenhuma liga encontrada</string>
+    
+    <string name="match_details">Detalhes do Jogo</string>
+    <string name="match_overview">Visão Geral</string>
+    <string name="match_stats">Estatísticas</string>
+    <string name="match_lineups">Onzes</string>
+    <string name="match_h2h">Confrontos</string>
+    
+    <string name="kickoff">Início</string>
+    <string name="venue">Local</string>
+    <string name="stadium">Estádio</string>
+    <string name="referee">Árbitro</string>
+    <string name="possession">Posse de Bola</string>
+    <string name="shots_on_target">Remates à Baliza</string>
+    <string name="total_shots">Remates Totais</string>
+    <string name="fouls">Faltas</string>
+    <string name="corners">Pontapés de Canto</string>
+    <string name="yellow_cards">Cartões Amarelos</string>
+    <string name="red_cards">Cartões Vermelhos</string>
+    <string name="formation">Formação</string>
+    <string name="starting_xi">Onze Inicial</string>
+    <string name="substitutes">Suplentes</string>
+    
+    <string name="settings_title">Definições</string>
+    <string name="settings_language">Idioma</string>
+    <string name="settings_language_desc">Selecionar idioma da interface</string>
+    <string name="settings_theme">Aparência</string>
+    <string name="settings_theme_desc">Escolher modo escuro, claro ou de sistema</string>
+    <string name="theme_system">Padrão do Sistema</string>
+    <string name="theme_dark">Tema Escuro (Recomendado)</string>
+    <string name="theme_light">Tema Claro</string>
+    <string name="settings_api">Servidor e Conectividade</string>
+    <string name="settings_api_desc">Estado do servidor de resultados em direto</string>
+    <string name="settings_about">Sobre Football Today</string>
+    <string name="settings_version">Versão 1.0.0 (Nativo Android)</string>
+    <string name="settings_sync_status">Sincronização em Tempo Real</string>
+    <string name="settings_sync_active">Atualização automática a cada 15–20s</string>
+    
+    <string name="retry">Tentar novamente</string>
+    <string name="error_loading">Não foi possível carregar os jogos</string>
+    <string name="error_loading_desc">Verifique a sua ligação à internet ou o estado do servidor.</string>
+</resources>

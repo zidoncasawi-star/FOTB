@@ -1,0 +1,79 @@
+<resources>
+    <string name="app_name">Football Today</string>
+    <string name="tab_live">En Direct</string>
+    <string name="tab_matches">Matchs</string>
+    <string name="tab_leagues">Ligues</string>
+    <string name="tab_settings">Paramètres</string>
+    
+    <string name="live_matches">Matchs en Direct</string>
+    <string name="no_live_matches">Aucun Match en Direct</string>
+    <string name="no_live_matches_desc">Aucun match en cours pour le moment. Consultez l\'onglet Matchs pour les prochaines rencontres.</string>
+    <string name="view_today_matches">Voir les matchs d\'aujourd\'hui</string>
+    
+    <string name="status_live">DIRECT</string>
+    <string name="status_halftime">MT</string>
+    <string name="status_finished">TERM</string>
+    <string name="status_scheduled">À venir</string>
+    <string name="status_postponed">Reporté</string>
+    <string name="status_cancelled">Annulé</string>
+    
+    <string name="updated_just_now">Mis à jour à l\'instant</string>
+    <string name="updated_seconds_ago">Mis à jour il y a %1$ds</string>
+    <string name="updated_minutes_ago">Mis à jour il y a %1$dm</string>
+    <string name="refresh">Actualiser</string>
+    
+    <string name="today">Aujourd\'hui</string>
+    <string name="yesterday">Hier</string>
+    <string name="tomorrow">Demain</string>
+    
+    <string name="all_leagues">Toutes les Ligues</string>
+    <string name="filter_all">Tous</string>
+    <string name="filter_live">En Direct</string>
+    <string name="filter_finished">Terminés</string>
+    <string name="filter_upcoming">À venir</string>
+    
+    <string name="search_leagues">Rechercher des ligues, coupes, pays…</string>
+    <string name="no_matches_found">Aucun match trouvé</string>
+    <string name="no_matches_found_desc">Aucune rencontre programmée pour cette date ou ce filtre.</string>
+    <string name="no_leagues_found">Aucune ligue trouvée</string>
+    
+    <string name="match_details">Détails du Match</string>
+    <string name="match_overview">Aperçu</string>
+    <string name="match_stats">Statistiques</string>
+    <string name="match_lineups">Compositions</string>
+    <string name="match_h2h">Face-à-face</string>
+    
+    <string name="kickoff">Coup d\'envoi</string>
+    <string name="venue">Lieu</string>
+    <string name="stadium">Stade</string>
+    <string name="referee">Arbitre</string>
+    <string name="possession">Possession</string>
+    <string name="shots_on_target">Tirs cadrés</string>
+    <string name="total_shots">Tirs totaux</string>
+    <string name="fouls">Fautes</string>
+    <string name="corners">Corners</string>
+    <string name="yellow_cards">Cartons jaunes</string>
+    <string name="red_cards">Cartons rouges</string>
+    <string name="formation">Formation</string>
+    <string name="starting_xi">Onze de Départ</string>
+    <string name="substitutes">Remplaçants</string>
+    
+    <string name="settings_title">Paramètres</string>
+    <string name="settings_language">Langue</string>
+    <string name="settings_language_desc">Sélectionner la langue de l\'application</string>
+    <string name="settings_theme">Apparence</string>
+    <string name="settings_theme_desc">Choisir le mode sombre, clair ou système</string>
+    <string name="theme_system">Par défaut du système</string>
+    <string name="theme_dark">Thème Sombre (Recommandé)</string>
+    <string name="theme_light">Thème Clair</string>
+    <string name="settings_api">Serveur et Connectivité</string>
+    <string name="settings_api_desc">État du serveur de scores en direct</string>
+    <string name="settings_about">À propos de Football Today</string>
+    <string name="settings_version">Version 1.0.0 (Natif Android)</string>
+    <string name="settings_sync_status">Synchronisation en Direct</string>
+    <string name="settings_sync_active">Actualisation auto toutes les 15–20s</string>
+    
+    <string name="retry">Réessayer</string>
+    <string name="error_loading">Impossible de charger les matchs</string>
+    <string name="error_loading_desc">Veuillez vérifier votre connexion réseau ou l\'état du serveur.</string>
+</resources>

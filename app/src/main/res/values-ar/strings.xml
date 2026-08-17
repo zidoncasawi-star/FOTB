@@ -1,0 +1,79 @@
+<resources>
+    <string name="app_name">Football Today</string>
+    <string name="tab_live">مباشر</string>
+    <string name="tab_matches">المباريات</string>
+    <string name="tab_leagues">الدوريات</string>
+    <string name="tab_settings">الإعدادات</string>
+    
+    <string name="live_matches">المباريات المباشرة</string>
+    <string name="no_live_matches">لا توجد مباريات مباشرة الآن</string>
+    <string name="no_live_matches_desc">لا توجد مباريات جارية حالياً. تصفح جدول المباريات لمشاهدة المواعيد القادمة.</string>
+    <string name="view_today_matches">عرض مباريات اليوم</string>
+    
+    <string name="status_live">مباشر</string>
+    <string name="status_halftime">استراحة</string>
+    <string name="status_finished">انتهت</string>
+    <string name="status_scheduled">قادمة</string>
+    <string name="status_postponed">مؤجلة</string>
+    <string name="status_cancelled">ملغاة</string>
+    
+    <string name="updated_just_now">تم التحديث الآن</string>
+    <string name="updated_seconds_ago">تم التحديث منذ %1$d ثانية</string>
+    <string name="updated_minutes_ago">تم التحديث منذ %1$d دقيقة</string>
+    <string name="refresh">تحديث</string>
+    
+    <string name="today">اليوم</string>
+    <string name="yesterday">أمس</string>
+    <string name="tomorrow">غداً</string>
+    
+    <string name="all_leagues">جميع الدوريات</string>
+    <string name="filter_all">الكل</string>
+    <string name="filter_live">مباشر</string>
+    <string name="filter_finished">انتهت</string>
+    <string name="filter_upcoming">قادمة</string>
+    
+    <string name="search_leagues">البحث في الدوريات، البطولات، البلدان…</string>
+    <string name="no_matches_found">لم يتم العثور على مباريات</string>
+    <string name="no_matches_found_desc">لا توجد مباريات مجدولة لهذا التاريخ أو الفلتر.</string>
+    <string name="no_leagues_found">لم يتم العثور على دوريات</string>
+    
+    <string name="match_details">تفاصيل المباراة</string>
+    <string name="match_overview">نظرة عامة</string>
+    <string name="match_stats">الإحصائيات</string>
+    <string name="match_lineups">التشكيلة</string>
+    <string name="match_h2h">المواجهات المباشرة</string>
+    
+    <string name="kickoff">صافرة البداية</string>
+    <string name="venue">المكان</string>
+    <string name="stadium">الملعب</string>
+    <string name="referee">الحكم</string>
+    <string name="possession">الاستحواذ</string>
+    <string name="shots_on_target">التسديدات على المرمى</string>
+    <string name="total_shots">إجمالي التسديدات</string>
+    <string name="fouls">الأخطاء</string>
+    <string name="corners">الركنيات</string>
+    <string name="yellow_cards">البطاقات الصفراء</string>
+    <string name="red_cards">البطاقات الحمراء</string>
+    <string name="formation">خطة اللعب</string>
+    <string name="starting_xi">التشكيلة الأساسية</string>
+    <string name="substitutes">البدلاء</string>
+    
+    <string name="settings_title">الإعدادات</string>
+    <string name="settings_language">اللغة</string>
+    <string name="settings_language_desc">اختر لغة واجهة التطبيق</string>
+    <string name="settings_theme">المظهر والتصميم</string>
+    <string name="settings_theme_desc">اختر الوضع الداكن، الفاتح، أو تلقائي النظام</string>
+    <string name="theme_system">تلقائي النظام</string>
+    <string name="theme_dark">الوضع الداكن (موصى به)</string>
+    <string name="theme_light">الوضع الفاتح</string>
+    <string name="settings_api">الخادم والاتصال</string>
+    <string name="settings_api_desc">حالة خادم النتائج المباشرة</string>
+    <string name="settings_about">حول تطبيق Football Today</string>
+    <string name="settings_version">الإصدار 1.0.0 (أندرويد أصلي)</string>
+    <string name="settings_sync_status">المزامنة الحية</string>
+    <string name="settings_sync_active">تحديث تلقائي كل 15–20 ثانية في شاشة المباشر</string>
+    
+    <string name="retry">إعادة المحاولة</string>
+    <string name="error_loading">تعذر تحميل بيانات المباريات</string>
+    <string name="error_loading_desc">يرجى التحقق من اتصال الإنترنت أو حالة الخادم.</string>
+</resources>

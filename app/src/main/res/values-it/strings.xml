@@ -1,0 +1,79 @@
+<resources>
+    <string name="app_name">Football Today</string>
+    <string name="tab_live">Dal Vivo</string>
+    <string name="tab_matches">Partite</string>
+    <string name="tab_leagues">Campionati</string>
+    <string name="tab_settings">Impostazioni</string>
+    
+    <string name="live_matches">Partite in Diretta</string>
+    <string name="no_live_matches">Nessuna Partita in Diretta</string>
+    <string name="no_live_matches_desc">Nessuna partita in corso al momento. Consulta la scheda Partite per i prossimi incontri.</string>
+    <string name="view_today_matches">Vedi partite di oggi</string>
+    
+    <string name="status_live">LIVE</string>
+    <string name="status_halftime">INT</string>
+    <string name="status_finished">FIN</string>
+    <string name="status_scheduled">In programma</string>
+    <string name="status_postponed">Rinviata</string>
+    <string name="status_cancelled">Annullata</string>
+    
+    <string name="updated_just_now">Aggiornato adesso</string>
+    <string name="updated_seconds_ago">Aggiornato %1$ds fa</string>
+    <string name="updated_minutes_ago">Aggiornato %1$dm fa</string>
+    <string name="refresh">Aggiorna</string>
+    
+    <string name="today">Oggi</string>
+    <string name="yesterday">Ieri</string>
+    <string name="tomorrow">Domani</string>
+    
+    <string name="all_leagues">Tutti i Campionati</string>
+    <string name="filter_all">Tutti</string>
+    <string name="filter_live">In Diretta</string>
+    <string name="filter_finished">Terminati</string>
+    <string name="filter_upcoming">In programma</string>
+    
+    <string name="search_leagues">Cerca campionati, coppe, nazioni…</string>
+    <string name="no_matches_found">Nessuna partita trovata</string>
+    <string name="no_matches_found_desc">Nessuna partita in programma per questa data o filtro.</string>
+    <string name="no_leagues_found">Nessun campionato trovato</string>
+    
+    <string name="match_details">Dettagli Partita</string>
+    <string name="match_overview">Panoramica</string>
+    <string name="match_stats">Statistiche</string>
+    <string name="match_lineups">Formazioni</string>
+    <string name="match_h2h">Precedenti</string>
+    
+    <string name="kickoff">Calcio d\'inizio</string>
+    <string name="venue">Luogo</string>
+    <string name="stadium">Stadio</string>
+    <string name="referee">Arbitro</string>
+    <string name="possession">Possesso Palla</string>
+    <string name="shots_on_target">Tiri in Porta</string>
+    <string name="total_shots">Tiri Totali</string>
+    <string name="fouls">Falli</string>
+    <string name="corners">Calci d\'Angolo</string>
+    <string name="yellow_cards">Cartellini Gialli</string>
+    <string name="red_cards">Cartellini Rossi</string>
+    <string name="formation">Modulo</string>
+    <string name="starting_xi">Titolari</string>
+    <string name="substitutes">Panchina</string>
+    
+    <string name="settings_title">Impostazioni</string>
+    <string name="settings_language">Lingua</string>
+    <string name="settings_language_desc">Seleziona la lingua dell\'interfaccia</string>
+    <string name="settings_theme">Aspetto</string>
+    <string name="settings_theme_desc">Scegli modalità scura, chiara o di sistema</string>
+    <string name="theme_system">Predefinito di Sistema</string>
+    <string name="theme_dark">Tema Scuro (Consigliato)</string>
+    <string name="theme_light">Tema Chiaro</string>
+    <string name="settings_api">Server e Connettività</string>
+    <string name="settings_api_desc">Stato del server live score</string>
+    <string name="settings_about">Informazioni su Football Today</string>
+    <string name="settings_version">Versione 1.0.0 (Nativo Android)</string>
+    <string name="settings_sync_status">Sincronizzazione Live</string>
+    <string name="settings_sync_active">Aggiornamento automatico ogni 15–20s</string>
+    
+    <string name="retry">Riprova</string>
+    <string name="error_loading">Impossibile caricare le partite</string>
+    <string name="error_loading_desc">Verifica la connessione di rete o lo stato del server.</string>
+</resources>
