@@ -1,5 +1,6 @@
 package com.example.data.repository
 
+import android.util.Log
 import com.example.data.api.ApiClient
 import com.example.data.api.MockDataGenerator
 import com.example.data.model.LanguageDto
@@ -12,6 +13,8 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
+private const val TAG = "FootballRepository"
+
 class FootballRepository {
 
   private val apiService = ApiClient.apiService
@@ -19,10 +22,9 @@ class FootballRepository {
   suspend fun getLiveMatches(langCode: String): Result<List<Match>> = withContext(Dispatchers.IO) {
     try {
       val response = apiService.getLiveMatches(lang = langCode)
-      val domainMatches = response.map { it.toDomain() }
-      Result.success(domainMatches)
+      Result.success(response.matches.map { it.toDomain() })
     } catch (e: Throwable) {
-      // Fallback gracefully to realistic mock matches if API endpoint fails
+      Log.w(TAG, "getLiveMatches failed, falling back to mock data", e)
       val fallback = MockDataGenerator.getLiveMatches().map { it.toDomain() }
       Result.success(fallback)
     }
@@ -42,9 +44,9 @@ class FootballRepository {
         leagueId = leagueId,
         status = status
       )
-      val domainMatches = response.map { it.toDomain() }
-      Result.success(domainMatches)
+      Result.success(response.matches.map { it.toDomain() })
     } catch (e: Throwable) {
+      Log.w(TAG, "getMatches failed, falling back to mock data", e)
       // Filter mock matches by date, league, and status
       val allDateMatches = MockDataGenerator.getMatchesForDate(date).map { it.toDomain() }
       val filtered = allDateMatches.filter { match ->
@@ -59,9 +61,9 @@ class FootballRepository {
   suspend fun getLeagues(langCode: String): Result<List<League>> = withContext(Dispatchers.IO) {
     try {
       val response = apiService.getLeagues(lang = langCode)
-      val domainLeagues = response.map { it.toDomain() }
-      Result.success(domainLeagues)
+      Result.success(response.leagues.map { it.toDomain() })
     } catch (e: Throwable) {
+      Log.w(TAG, "getLeagues failed, falling back to mock data", e)
       val fallback = MockDataGenerator.mockLeagues.map { it.toDomain() }
       Result.success(fallback)
     }
@@ -70,20 +72,22 @@ class FootballRepository {
   suspend fun getLanguages(): Result<List<LanguageDto>> = withContext(Dispatchers.IO) {
     try {
       val response = apiService.getLanguages()
-      if (response.isNotEmpty()) {
-        Result.success(response)
+      if (response.languages.isNotEmpty()) {
+        Result.success(response.languages)
       } else {
         Result.success(MockDataGenerator.supportedLanguages)
       }
     } catch (e: Throwable) {
+      Log.w(TAG, "getLanguages failed, falling back to bundled defaults", e)
       Result.success(MockDataGenerator.supportedLanguages)
     }
   }
 
   suspend fun getRemoteTranslations(langCode: String): Map<String, String> = withContext(Dispatchers.IO) {
     try {
-      apiService.getTranslations(lang = langCode)
+      apiService.getTranslations(lang = langCode).strings
     } catch (e: Throwable) {
+      Log.w(TAG, "getRemoteTranslations failed, falling back to bundled defaults", e)
       MockDataGenerator.getRemoteTranslations(langCode)
     }
   }

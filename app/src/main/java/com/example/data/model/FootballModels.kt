@@ -43,6 +43,31 @@ data class LanguageDto(
   @Json(name = "default") val isDefault: Boolean? = false
 )
 
+// The backend wraps every list response in an envelope object rather than
+// returning a bare JSON array/map - these mirror that exact shape.
+@JsonClass(generateAdapter = true)
+data class MatchesEnvelope(
+  @Json(name = "lang") val lang: String? = null,
+  @Json(name = "matches") val matches: List<MatchDto> = emptyList()
+)
+
+@JsonClass(generateAdapter = true)
+data class LeaguesEnvelope(
+  @Json(name = "lang") val lang: String? = null,
+  @Json(name = "leagues") val leagues: List<LeagueDto> = emptyList()
+)
+
+@JsonClass(generateAdapter = true)
+data class LanguagesEnvelope(
+  @Json(name = "languages") val languages: List<LanguageDto> = emptyList()
+)
+
+@JsonClass(generateAdapter = true)
+data class TranslationsEnvelope(
+  @Json(name = "lang") val lang: String? = null,
+  @Json(name = "strings") val strings: Map<String, String> = emptyMap()
+)
+
 enum class MatchStatus(val apiValue: String) {
   SCHEDULED("scheduled"),
   LIVE("live"),

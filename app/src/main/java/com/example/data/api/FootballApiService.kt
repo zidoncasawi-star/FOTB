@@ -1,8 +1,9 @@
 package com.example.data.api
 
-import com.example.data.model.LanguageDto
-import com.example.data.model.LeagueDto
-import com.example.data.model.MatchDto
+import com.example.data.model.LanguagesEnvelope
+import com.example.data.model.LeaguesEnvelope
+import com.example.data.model.MatchesEnvelope
+import com.example.data.model.TranslationsEnvelope
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -11,7 +12,7 @@ interface FootballApiService {
   @GET("live.php")
   suspend fun getLiveMatches(
     @Query("lang") lang: String
-  ): List<MatchDto>
+  ): MatchesEnvelope
 
   @GET("matches.php")
   suspend fun getMatches(
@@ -19,18 +20,18 @@ interface FootballApiService {
     @Query("date") date: String? = null,
     @Query("league_id") leagueId: Int? = null,
     @Query("status") status: String? = null
-  ): List<MatchDto>
+  ): MatchesEnvelope
 
   @GET("leagues.php")
   suspend fun getLeagues(
     @Query("lang") lang: String
-  ): List<LeagueDto>
+  ): LeaguesEnvelope
 
   @GET("languages.php")
-  suspend fun getLanguages(): List<LanguageDto>
+  suspend fun getLanguages(): LanguagesEnvelope
 
   @GET("translations.php")
   suspend fun getTranslations(
     @Query("lang") lang: String
-  ): Map<String, String>
+  ): TranslationsEnvelope
 }
