@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,9 +21,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.EmojiEvents
-import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.SportsSoccer
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -63,7 +59,6 @@ import com.example.ui.common.ErrorState
 import com.example.ui.common.LiveBadge
 import com.example.ui.common.TeamLogo
 import com.example.ui.theme.AccentGold
-import com.example.ui.theme.AccentSky
 import com.example.ui.theme.LiveGreen
 import com.example.ui.theme.LiveRed
 
@@ -375,20 +370,10 @@ private fun MatchOverviewSection(
           label = translationManager.getString(R.string.kickoff, "kickoff"),
           value = "${match.localKickoffDate} • ${match.localKickoffTime} (Local Time)"
         )
-        DetailRow(
-          icon = Icons.Default.LocationOn,
-          label = translationManager.getString(R.string.stadium, "stadium"),
-          value = "${match.homeName} Stadium, ${match.country}"
-        )
-        DetailRow(
-          icon = Icons.Default.Person,
-          label = translationManager.getString(R.string.referee, "referee"),
-          value = "M. Oliver (Official)"
-        )
       }
     }
 
-    // Match Timeline Placeholder
+    // Match events (goals, cards, etc.) are not provided by the data source yet.
     Box(
       modifier = Modifier
         .fillMaxWidth()
@@ -404,23 +389,11 @@ private fun MatchOverviewSection(
           fontWeight = FontWeight.Bold,
           color = MaterialTheme.colorScheme.onSurface
         )
-
-        if (match.isLive || match.isFinished) {
-          EventItem(minute = "23'", player = "Goal! ${match.homeName} (#9)", isHome = true, isGoal = true)
-          EventItem(minute = "41'", player = "Yellow Card (#4)", isHome = false, isGoal = false)
-          if ((match.awayScore ?: 0) > 0) {
-            EventItem(minute = "58'", player = "Goal! ${match.awayName} (#10)", isHome = false, isGoal = true)
-          }
-          if ((match.homeScore ?: 0) > 1) {
-            EventItem(minute = "65'", player = "Goal! ${match.homeName} (#7)", isHome = true, isGoal = true)
-          }
-        } else {
-          Text(
-            text = "Match has not started yet. Live events and goals will appear here.",
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-          )
-        }
+        Text(
+          text = "Match events are not available yet.",
+          style = MaterialTheme.typography.bodyMedium,
+          color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
       }
     }
   }
@@ -446,27 +419,6 @@ private fun DetailRow(icon: ImageVector, label: String, value: String) {
 }
 
 @Composable
-private fun EventItem(minute: String, player: String, isHome: Boolean, isGoal: Boolean) {
-  Row(
-    modifier = Modifier.fillMaxWidth(),
-    verticalAlignment = Alignment.CenterVertically,
-    horizontalArrangement = if (isHome) Arrangement.Start else Arrangement.End
-  ) {
-    Box(
-      modifier = Modifier
-        .clip(RoundedCornerShape(6.dp))
-        .background(if (isGoal) LiveGreen.copy(alpha = 0.15f) else MaterialTheme.colorScheme.surfaceVariant)
-        .padding(horizontal = 8.dp, vertical = 4.dp)
-    ) {
-      Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-        Text(text = minute, fontWeight = FontWeight.Bold, fontSize = 12.sp, color = if (isGoal) LiveGreen else MaterialTheme.colorScheme.onSurface)
-        Text(text = player, fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurface)
-      }
-    }
-  }
-}
-
-@Composable
 private fun MatchStatsSection(
   match: Match,
   translationManager: TranslationManager
@@ -487,93 +439,10 @@ private fun MatchStatsSection(
         color = MaterialTheme.colorScheme.onSurface
       )
 
-      StatBar(
-        label = translationManager.getString(R.string.possession, "possession"),
-        homeValue = "58%",
-        awayValue = "42%",
-        homeRatio = 0.58f
-      )
-
-      StatBar(
-        label = translationManager.getString(R.string.shots_on_target, "shots_on_target"),
-        homeValue = "7",
-        awayValue = "4",
-        homeRatio = 7f / 11f
-      )
-
-      StatBar(
-        label = translationManager.getString(R.string.total_shots, "total_shots"),
-        homeValue = "14",
-        awayValue = "9",
-        homeRatio = 14f / 23f
-      )
-
-      StatBar(
-        label = translationManager.getString(R.string.corners, "corners"),
-        homeValue = "6",
-        awayValue = "3",
-        homeRatio = 6f / 9f
-      )
-
-      StatBar(
-        label = translationManager.getString(R.string.fouls, "fouls"),
-        homeValue = "11",
-        awayValue = "13",
-        homeRatio = 11f / 24f
-      )
-
-      StatBar(
-        label = translationManager.getString(R.string.yellow_cards, "yellow_cards"),
-        homeValue = "2",
-        awayValue = "3",
-        homeRatio = 2f / 5f
-      )
-    }
-  }
-}
-
-@Composable
-private fun StatBar(
-  label: String,
-  homeValue: String,
-  awayValue: String,
-  homeRatio: Float
-) {
-  Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-    Row(
-      modifier = Modifier.fillMaxWidth(),
-      horizontalArrangement = Arrangement.SpaceBetween,
-      verticalAlignment = Alignment.CenterVertically
-    ) {
-      Text(text = homeValue, fontWeight = FontWeight.Bold, fontSize = 13.sp, color = LiveGreen)
-      Text(text = label, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-      Text(text = awayValue, fontWeight = FontWeight.Bold, fontSize = 13.sp, color = AccentSky)
-    }
-
-    Row(
-      modifier = Modifier
-        .fillMaxWidth()
-        .height(6.dp)
-        .clip(RoundedCornerShape(3.dp))
-        .background(MaterialTheme.colorScheme.surfaceVariant)
-    ) {
-      Box(
-        modifier = Modifier
-          .weight(homeRatio.coerceIn(0.05f, 0.95f))
-          .fillMaxSize()
-          .background(LiveGreen)
-      )
-      Box(
-        modifier = Modifier
-          .width(2.dp)
-          .fillMaxSize()
-          .background(MaterialTheme.colorScheme.surface)
-      )
-      Box(
-        modifier = Modifier
-          .weight((1f - homeRatio).coerceIn(0.05f, 0.95f))
-          .fillMaxSize()
-          .background(AccentSky)
+      Text(
+        text = "Match statistics are not available yet.",
+        style = MaterialTheme.typography.bodyMedium,
+        color = MaterialTheme.colorScheme.onSurfaceVariant
       )
     }
   }
@@ -598,48 +467,17 @@ private fun MatchLineupsSection(
           modifier = Modifier.fillMaxWidth(),
           horizontalArrangement = Arrangement.SpaceBetween
         ) {
-          Column {
-            Text(text = match.homeName, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
-            Text(text = "Formation: 4-3-3", style = MaterialTheme.typography.bodySmall, color = LiveGreen)
-          }
-          Column(horizontalAlignment = Alignment.End) {
-            Text(text = match.awayName, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
-            Text(text = "Formation: 4-2-3-1", style = MaterialTheme.typography.bodySmall, color = AccentSky)
-          }
+          Text(text = match.homeName, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
+          Text(text = match.awayName, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
         }
 
         HorizontalDivider(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.4f), modifier = Modifier.padding(vertical = 4.dp))
 
         Text(
-          text = translationManager.getString(R.string.starting_xi, "starting_xi"),
-          style = MaterialTheme.typography.labelMedium,
-          fontWeight = FontWeight.Bold,
+          text = "Lineups are not available yet.",
+          style = MaterialTheme.typography.bodyMedium,
           color = MaterialTheme.colorScheme.onSurfaceVariant
         )
-
-        val samplePlayers = listOf(
-          Pair("1. Raya (GK)", "1. Sánchez (GK)"),
-          Pair("4. White", "24. James (C)"),
-          Pair("2. Saliba", "6. Silva"),
-          Pair("6. Gabriel", "26. Colwill"),
-          Pair("35. Zinchenko", "3. Cucurella"),
-          Pair("41. Rice", "25. Caicedo"),
-          Pair("8. Ødegaard (C)", "8. Fernández"),
-          Pair("29. Havertz", "23. Gallagher"),
-          Pair("7. Saka", "20. Palmer"),
-          Pair("9. Jesus", "15. Jackson"),
-          Pair("11. Martinelli", "7. Sterling")
-        )
-
-        samplePlayers.forEach { (homeP, awayP) ->
-          Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-          ) {
-            Text(text = homeP, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurface)
-            Text(text = awayP, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurface)
-          }
-        }
       }
     }
   }
@@ -666,27 +504,11 @@ private fun MatchH2HSection(
         color = MaterialTheme.colorScheme.onSurface
       )
 
-      val h2h = listOf(
-        Triple("2024-04-23", "${match.homeName} 5 - 0 ${match.awayName}", "Premier League"),
-        Triple("2023-10-21", "${match.awayName} 2 - 2 ${match.homeName}", "Premier League"),
-        Triple("2023-05-02", "${match.homeName} 3 - 1 ${match.awayName}", "Premier League"),
-        Triple("2022-11-06", "${match.awayName} 0 - 1 ${match.homeName}", "Premier League")
+      Text(
+        text = "Head-to-head history is not available yet.",
+        style = MaterialTheme.typography.bodyMedium,
+        color = MaterialTheme.colorScheme.onSurfaceVariant
       )
-
-      h2h.forEach { (date, score, comp) ->
-        Row(
-          modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 4.dp),
-          horizontalArrangement = Arrangement.SpaceBetween,
-          verticalAlignment = Alignment.CenterVertically
-        ) {
-          Column {
-            Text(text = score, fontWeight = FontWeight.Bold, fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurface)
-            Text(text = "$comp • $date", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-          }
-        }
-      }
     }
   }
 }
